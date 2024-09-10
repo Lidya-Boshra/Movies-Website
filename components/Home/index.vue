@@ -1,13 +1,20 @@
 <script setup>
-import { useFetch } from "@vueuse/core"; // Import useFetch if not already
+const { $useTmdbFetch } = useNuxtApp();
 
-const { data, pending, error, refresh } = await useFetch(
-  "https://api.themoviedb.org/3/movie/upcoming?api_key=55be2352a95420c9b7dd9b351e884058"
-);
+const { data, pending, error } = await $useTmdbFetch("movie/popular");
 
-console.log(JSON.parse(data.value));
+
+const movieData = data.value;
 </script>
 
-<template></template>
+<template>
+  <div>
+    <HomeBanner :movieData="movieData" />
+    <HomeMovies :movieData="movieData" />
+    <div class="mt-14">
+      <HomeTV />
+    </div>
+  </div>
+</template>
 
 <style lang="css" scoped></style>

@@ -27,4 +27,7 @@ export default defineNuxtConfig({
   },
 
   plugins: ['~/plugins/tmdb.js'],
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' }
+  },
 });

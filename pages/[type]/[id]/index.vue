@@ -1,19 +1,19 @@
 <script setup>
 import { onMounted, ref } from "vue";
-const { $useTmdbFetch } = useNuxtApp();
+const { $useTmdbFetch, _route } = useNuxtApp();
 const movieDetails = ref(null);
-const id = ref(null);
 
 onMounted(async () => {
-  id.value = useNuxtApp()._route.params.id;
-  const { data, pending, error } = await $useTmdbFetch("movie/" + id.value);
+  const id = _route.params.id;
+  const { data } = await $useTmdbFetch(`movie/${id}`);
+  console.log(data)
   movieDetails.value = data.value;
 });
 </script>
 
 <template>
   <Banner :movieData="movieDetails" />
-  <MediaDetails :getData="movieDetails"/>
+  <MediaDetails :getData="movieDetails" />
 </template>
 
 <style lang="css"></style>

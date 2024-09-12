@@ -2,6 +2,16 @@
 const props = defineProps({
   getData: Object,
 });
+import { onMounted, ref } from "vue";
+const { $useTmdbFetch, _route } = useNuxtApp();
+const castDetails = ref(null);
+
+onMounted(async () => {
+  const id = _route.params.id;
+  const { data } = await $useTmdbFetch(`movie/${id}/credits`);
+  console.log(data);
+  castDetails.value = data?.value?.cast;
+});
 </script>
 
 <template>
@@ -69,6 +79,13 @@ const props = defineProps({
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="px-10 mt-10">
+    <h3 class="text-2xl">Cast</h3>
+
+    <div class="flex items-center overflow-x-auto">
+      <MediaCard v-for="cast in castDetails" :key="cast.id" :getData="cast" allDetails="false" from="cast"/>
     </div>
   </div>
 </template>

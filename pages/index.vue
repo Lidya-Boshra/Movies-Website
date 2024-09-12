@@ -10,7 +10,7 @@ const [
 </script>
 <template>
   <div>
-    <Banner :movieData="movieData.results[0]" />
+    <Banner :movieData="movieData?.results[0]" />
     <div class="my-3 px-12">
       <div class="my-7 flex w-full justify-between items-center">
         <h1 class="text-2xl font-medium">Popular Movies</h1>
@@ -18,7 +18,7 @@ const [
       </div>
       <div class="flex gap-3 max-w-full overflow-x-auto">
         <MediaCard
-          v-for="movie in movieData.results"
+          v-for="movie in movieData?.results"
           :key="movie.id"
           :getData="movie"
           :routeURL="`/movie/${movie?.id}`"
@@ -32,7 +32,7 @@ const [
       </div>
       <div class="flex gap-3 max-w-full overflow-x-auto">
         <MediaCard
-          v-for="tv in TVData.results"
+          v-for="tv in TVData?.results"
           :key="tv.id"
           :getData="tv"
           :routeURL="`/tv/${tv?.id}`"
